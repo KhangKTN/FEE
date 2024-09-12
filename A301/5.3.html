@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<style>
+    .container-fluid{
+        background-color: antiquewhite;
+        height: 100vh;
+    }
+
+    .todo_item{
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center;
+        margin-top: 8px;
+    }
+
+    h6{
+        margin-block: 0;
+    }
+
+    .button_action{
+        display: flex;
+        column-gap: 12px;
+    }
+
+</style>
+<body>
+    <div class="container-fluid pt-5 px-5">
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+            <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+            </symbol>
+            <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+            </symbol>
+            <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            </symbol>
+        </svg>
+        
+        <div style="position: fixed; top: 20px; left: 0%;" class="alert alert-danger d-flex d-none align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                <use xlink:href="#exclamation-triangle-fill" />
+            </svg>
+            <div>
+                Task name is not blank
+            </div>
+        </div>
+        <div style="position: fixed; top: 20px; left: 0%;" class="alert alert-success d-flex d-none align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                <use xlink:href="#check-circle-fill" />
+            </svg>
+            <div>
+                
+            </div>
+        </div>
+        <h1 style="width: fit-content;" class="mx-auto d-block text-center badge bg-success rounded-pill fs-2">To Do List</h1>
+        <form id="form" class="input-group my-3 mt-5">
+            <input id="input" autofocus type="text" class="form-control" placeholder="Task name..." aria-label="Recipient's username"
+                aria-describedby="button-addon2">
+            <button class="btn btn-outline-success" type="button" id="button-add">Add item</button>
+        </form>
+        <div id="listTodo" class="mt-5">
+            <!-- <div class="todo_item">
+                <h6>Task name</h6>
+                <div class="button_action">
+                    <button id="btn_edit" class="btn btn-warning btn-sm">Edit</button>
+                    <button id="btn_delete" class="btn btn-danger btn-sm">Delete</button>
+                </div>
+            </div> -->
+        </div>
+        <div style="width: fit-content;" class="mx-auto">
+            <button id="btn_remove_all" class="btn btn-outline-success px-4">Remove All</button>
+        </div>
+        
+    </div>
+</body>
+<script>
+    const buttonAdd = document.querySelector('#button-add')
+    const inputEl = document.querySelector('#input')
+    const listTodo = document.querySelector('#listTodo')
+    const form = document.querySelector('#form')
+    const btnRemoveAll = document.querySelector('#btn_remove_all')
+
+    const createButton = ({className, id, text}) => {
+        const button = document.createElement('button')
+        button.textContent = text
+        button.classList.add('btn')
+        button.classList.add(className)
+        button.classList.add('btn-sm')
+        button.setAttribute('id', id)
+
+        return button
+    }
+
+    const addTask = () => {
+        const valueInput = inputEl.value
+        if(!valueInput.trim()){
+            showAlert({type: 'danger', message: ''})
+            return
+        }
+
+        const todoItem = document.createElement('div')
+        todoItem.classList.add('todo_item')
+
+        const todoName = document.createElement('h6')
+        todoName.textContent = valueInput
+
+        const divForBtn = document.createElement('div')
+        const buttonEdit = createButton({className: 'btn-warning', id: 'btn_edit', text: 'Edit'})
+        const buttonDelete = createButton({className: 'btn-danger', id: 'btn_delete', text: 'Delete'})
+
+        divForBtn.append(buttonEdit, buttonDelete)
+        divForBtn.classList.add('button_action')
+
+        todoItem.append(todoName, divForBtn)
+        listTodo.append(todoItem)
+        form.reset()
+
+        showAlert({type: 'success', message: 'Add new task name successfully!'})
+    }
+
+    const showAlert = ({type, message}) => {
+        let alertEl = null;
+        if(type === 'success'){
+            alertEl = document.querySelector('.alert-success')
+            alertEl.children[1].textContent = message
+            alertEl.classList.toggle('d-none')
+            setTimeout(() => {
+                alertEl.classList.add('d-none')
+            }, 2000)
+        }
+        else if(type === 'danger'){
+            alertEl = document.querySelector('.alert-danger')
+            alertEl.classList.toggle('d-none')
+
+            setTimeout(() => {
+                alertEl.classList.add('d-none')
+            }, 2000)
+        }
+    }
+
+    buttonAdd.addEventListener('click', () => {
+        addTask()
+    })
+
+    listTodo.addEventListener('click', (e) => {
+        const elClick = e.target.id
+        console.log(elClick);
+        if(elClick === 'btn_delete'){
+            e.target.parentNode.parentNode.remove()
+        }
+        if(elClick === 'btn_edit'){
+            const h6 = e.target.parentNode.previousElementSibling
+            inputEl.value = h6.textContent
+            e.target.parentNode.parentNode.remove()
+        }
+    })
+
+    inputEl.addEventListener('keypress', function(e){
+        if(e.key === 'Enter'){
+            e.preventDefault()
+            addTask()
+        }
+    })
+
+    btnRemoveAll.addEventListener('click', (e) => {
+        const todoListItem = document.querySelectorAll('.todo_item')
+        todoListItem.forEach(todoItem => {
+            todoItem.remove()
+        })
+        showAlert({type: 'success', message: 'Remove all task successfully!'})
+    })
+</script>
+</html>

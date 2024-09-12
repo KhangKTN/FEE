@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../lib/bootstrap.min.css" >
+    <script src="../lib/jquery-3.7.1.min.js"></script>
+    <script src="../lib/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../lib/fontawesome-free-5.15.4-web/css/all.min.css">
+    <title>Document</title>
+</head>
+<style>
+    .loader {
+        width: 50px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: 8px solid;
+        border-color: green #0000;
+        animation: l1 1s infinite;
+        margin-top: 20px;
+    }
+
+    div>button{
+        background-color: green !important;
+        color: white !important;
+    }
+
+    input::placeholder{
+        color: #d3d3d3 !important;
+    }
+
+    nav, div.row > div:nth-child(1){
+        background-color: #dcdcdc8d !important;
+    }
+
+    @keyframes l1 {
+        to{transform: rotate(.5turn)}
+    }
+</style>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-light d-flex justify-content-between">
+        <a class="navbar-brand font-weight-bold" href="#">CMS</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="dropdown open">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-md-right p-0" aria-labelledby="triggerId">
+                <a id="btn_profile" class="dropdown-item" href="#"><i class="fa fa-user-circle" aria-hidden="true"></i> User Profile</a>
+                <a id="btn_logout" class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col-2 p-0 min-vh-100 border">
+            <div class="d-flex mx-auto p-3 border">
+                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Search...">
+                <div class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i></div>
+            </div>
+            <div class="pl-4 py-3 border-bottom">
+                <a id="viewContent" href="">
+                    <i class="fa fa-table" aria-hidden="true"></i>
+                    View contents
+                </a>
+            </div>
+            <div class="pl-4 py-3 border-bottom">
+                <a id="addContent" href="">
+                    <i class="far fa-edit"></i>
+                    Form contents
+                </a>
+            </div>
+        </div>
+        <div class="col-10">
+            
+        </div>
+    </div>
+</body>
+<script>
+    const loadDefault = () => {
+        $.ajax({
+            type: "GET",
+            url: "./ViewContent.html",
+            data: '',
+            success: function (response) {
+                $('.col-10').html(response) 
+            }
+        });
+    }
+
+    const handleLogout = () => {
+        window.location.href = './Login.html'
+        window.localStorage.removeItem('userLogin')
+    }
+
+    let resetFormEdit
+
+    loadDefault()
+
+    let contentRow = ''
+    let contentList = JSON.parse(window.localStorage.getItem('contentList'))
+    const userLogin = JSON.parse(window.localStorage.getItem('userLogin'))
+    const userList = JSON.parse(window.localStorage.getItem('listUser'))
+    let userData = userList.find(user => user.email === userLogin?.email)
+
+    if(!contentList) contentList = []
+
+    if(!userLogin) handleLogout()
+
+    const htmlLoading = '<div ><div class="loader"></div><span>Loading...</span></div>'
+
+    $('#profile').submit(function(e){
+        e.preventDefault()
+
+        const phoneValue = $('#phone').val()
+        if(isNaN(phoneValue)){
+            alert('Phone number is invalid!')
+            return
+        }
+    })
+
+    $('a#viewContent').click(function(e){
+        e.preventDefault()
+        
+        $.ajax({
+            type: "GET",
+            url: "./ViewContent.html",
+            data: '',
+            success: function (response) {
+                $('.col-10').html(htmlLoading) 
+                setTimeout(() => {
+                    $('.col-10').html(response) 
+                }, 1000);
+            }
+        });
+    })
+
+    $('a#addContent').click(function(e){
+        e.preventDefault()
+        
+        $.ajax({
+            type: "GET",
+            url: "./AddContent.html",
+            data: '',
+            success: function (response) {
+                $('.col-10').html(response) 
+            }
+        });
+    })
+
+    $('#btn_profile').click(function(){
+        $.ajax({
+            type: "GET",
+            url: "./EditProfile.html",
+            data: '',
+            success: function (response) {
+                $('.col-10').html(htmlLoading) 
+                setTimeout(() => {
+                    $('.col-10').html(response) 
+                }, 1000);
+            }
+        });
+    })
+
+    $('#btn_logout').click(function(){
+        handleLogout()
+    })
+</script>
+</html>

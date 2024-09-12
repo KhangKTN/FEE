@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../lib/bootstrap.min.css" >
+    <script src="../lib/jquery-3.7.1.min.js"></script>
+    <script src="../lib/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../lib/fontawesome-free-5.15.4-web/css/all.css">
+    <title>Document</title>
+</head>
+<style>
+    .trash{
+        height: fit-content;
+        margin: auto;
+    }
+
+    small{
+        color: red;
+    }
+</style>
+<body>
+    <div class="d-flex gap mx-4 mt-3">
+        <div style="flex-basis: 40%; margin-right: 16px;" class="">
+            <h3>Thong tin hoa don</h3>
+            <form id="form_hd" class="border rounded p-3" action="">
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="">Ho ten</label>
+                        <input type="text" class="form-control" name="" id="hoten" aria-describedby="helpId" placeholder="">
+                        <small id="helpId" class="form-text "></small>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="">CMND</label>
+                        <input type="text" class="form-control" name="" id="cmnd" aria-describedby="helpId" placeholder="" >
+                        <small id="helpId" class="form-text "></small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="">Ngay</label>
+                        <input type="date" class="form-control" name="" id="ngay" aria-describedby="helpId" placeholder="" >
+                        <small id="helpId" class="form-text "></small>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="">Dia chi</label>
+                        <input type="text" class="form-control" name="" id="diachi" aria-describedby="helpId" placeholder="" >
+                        <small id="helpId" class="form-text "></small>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label for="">Ghi chu</label>
+                        <textarea class="form-control" name="" id="ghichu" rows="3"></textarea>
+                        <small id="helpId" class="form-text "></small>
+                    </div>
+                </div>
+                <button class="btn btn-primary">Tao hoa don</button>
+            </form>
+        </div>
+        <div style="flex-basis: auto;" class="">
+            <h3>Chi tiet hoa don</h3>
+            <form id="form_cthd" class="p-3 border rounded" action="">
+                <div id="form_cthd_list">
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="">Ten hang</label>
+                            <input type="text" class="form-control" name="" id="tenhang" aria-describedby="helpId" placeholder="">
+                            <small id="helpId" class="form-text"></small>
+                        </div>
+                        <div class="form-group col">
+                            <label for="">So luong</label>
+                            <input type="text" class="form-control" name="" id="soluong" aria-describedby="helpId" placeholder="">
+                            <small id="helpId" class="form-text"></small>
+                        </div>
+                        <div class="form-group col">
+                            <label for="">Don gia</label>
+                            <input type="text" class="form-control" name="" id="dongia" aria-describedby="helpId" placeholder="">
+                            <small id="helpId" class="form-text"></small>
+                        </div>
+                        <button class="trash btn"><i class="fas fa-trash" aria-hidden="true"></i></button>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="">Ten hang</label>
+                            <input type="text" class="form-control" name="" id="tenhang" aria-describedby="helpId" placeholder="">
+                            <small id="helpId" class="form-text"></small>
+                        </div>
+                        <div class="form-group col">
+                            <label for="">So luong</label>
+                            <input type="text" class="form-control" name="" id="soluong" aria-describedby="helpId" placeholder="">
+                            <small id="helpId" class="form-text"></small>
+                        </div>
+                        <div class="form-group col">
+                            <label for="">Don gia</label>
+                            <input type="text" class="form-control" name="" id="dongia" aria-describedby="helpId" placeholder="">
+                            <small id="helpId" class="form-text"></small>
+                        </div>
+                        <button class="trash btn"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+                <div style="width: fit-content;" class="ml-auto">
+                    <button id="edit" type="button" class="btn btn-primary">Sua thong tin</button>
+                    <button id="add_row" type="button" class="btn btn-primary">Them row</button>
+                    <button id="export" type="button" class="btn btn-primary">Xuat</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="mt-5">
+        <h3 class="text-center">Danh sach hoa don</h3>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Ten</th>
+                    <th>CMND</th>
+                    <th>Ngay xuat</th>
+                    <th>Hang hoa</th>
+                    <th>So luong</th>
+                    <th>Don gia</th>
+                    <th>Thanh tien</th>
+                    <th>Tong tien</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr>
+                    <td rowspan="2">1</td>
+                    <td rowspan="2">Khang</td>
+                    <td rowspan="2">123456</td>
+                    <td rowspan="2">20/11/224</td>
+                    <td>Hang hoa 1</td>
+                    <td>2</td>
+                    <td>100000</td>
+                    <td>100000</td>
+                    <td rowspan="2">500000</td>
+                    <td>
+                        <button class="btn"><i class="fas fa-trash" aria-hidden="true"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td >Hang hoa 2</td>
+                    <td >100</td>
+                    <td >200000</td>
+                    <td >200000</td>
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td >Tong so luong</td>
+                    <td >100</td>
+                    <td >Tong so tien</td>
+                    <td >200000</td>
+                </tr> -->
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    const isTextAndNumber = (input) => {
+        return /^[A-Za-z0-9 ]*$/.test(input)
+    }
+
+    const isCMND = (input) => {
+        return /^[0-9]{9}$/.test(input)
+    }
+
+    const isPositiveNumber = (input) => {
+        return input > 0
+    }
+
+    const disableFormHoaDon = () => {
+        $('#form_hd').find('*').attr('disabled', true)
+        $('#form_cthd').find('*').attr('disabled', false)
+    }
+
+    const disableFormCTHD = () => {
+        $('#form_hd').find('*').attr('disabled', false)
+        $('#form_cthd').find('*').attr('disabled', true)
+    }
+
+    const loadDefault = () => {
+        $('form').trigger('reset')
+        disableFormCTHD()
+    }
+
+    loadDefault()
+
+    // init variable
+    let hoadonList = []
+    let hoadon = {}
+
+    // Handle submit form HoaDon
+    $('#form_hd').submit(function(e){
+        e.preventDefault()
+        const form = $(this)
+
+        let isValid = true
+
+        form.find('input, textarea').each(function(){
+            $(this).css('border-color', '#ced4da')
+            $(this).next().text('')
+
+            // Validate
+            const valueInput = $(this).val().trim()
+            const id = $(this).attr('id')
+
+            // if(!valueInput){
+            //     $(this).next().text('Yeu cau nhap du lieu')
+            //     isValid = false
+            //     $(this).css('border-color', 'red')
+            // }
+            // else if(['hoten', 'diachi', 'ghichu'].includes(id) && !isTextAndNumber(valueInput)){
+            //     $(this).next().text('Chi nhap ki tu chu va so')
+            //     isValid = false
+            //     $(this).css('border-color', 'red')
+            // }
+            // else if('cmnd' === id && !isCMND(valueInput)){
+            //     $(this).next().text('So CMND khong hop le')
+            //     isValid = false
+            //     $(this).css('border-color', 'red')
+            // }
+            // else if('ngay' === id && new Date(valueInput) > new Date()){
+            //     $(this).next().text('Ngay xuat kho khong hop le')
+            //     isValid = false
+            //     $(this).css('border-color', 'red')
+            // }
+        })
+
+        if(!isValid) return
+        // Get data
+        hoadon.id = hoadonList.length === 0 ? 1 : hoadonList.length + 1
+        hoadon.hoten = $('#hoten').val()
+        hoadon.cmnd = $('#cmnd').val()
+        hoadon.ngay = $('#ngay').val()
+        hoadon.diachi = $('#diachi').val()
+        hoadon.ghichu = $('#ghichu').val()
+        disableFormHoaDon()
+    })
+
+    // Handle add new row in ChiTietHoaDon
+    $('#add_row').click(function(){
+        const htmlRow = 
+            `<div class="row">
+                <div class="form-group col">
+                    <label for="">Ten hang</label>
+                    <input type="text" class="form-control" name="" id="tenhang" aria-describedby="helpId" placeholder="">
+                    <small id="helpId" class="form-text "></small>
+                </div>
+                <div class="form-group col">
+                    <label for="">So luong</label>
+                    <input type="text" class="form-control" name="" id="soluong" aria-describedby="helpId" placeholder="">
+                    <small id="helpId" class="form-text "></small>
+                </div>
+                <div class="form-group col">
+                    <label for="">Don gia</label>
+                    <input type="text" class="form-control" name="" id="dongia" aria-describedby="helpId" placeholder="">
+                    <small id="helpId" class="form-text "></small>
+                </div>
+                <button class="trash btn"><i class="fas fa-trash" aria-hidden="true"></i></button>
+            </div>`
+
+        $('#form_cthd_list').append(htmlRow)
+    })
+
+    // Delete row CTHD
+    $('#form_cthd_list').on('click', 'button.trash', function(e){
+        e.preventDefault()
+        $(this).parent().remove()
+    })
+
+    // Handle press button edit in ChiTietHoaDon
+    $('#edit').click(function(){
+        disableFormCTHD()
+    })
+
+    // Func calc TongTien for 1 HoaDon
+    const tongTien = (cthdList) => {
+        return cthdList.reduce((sum, cthd) => sum + cthd.soluong * cthd.dongia, 0)
+    }
+
+    // Reload table if list updated
+    const renderTable = () => {
+        console.log(hoadonList);
+        let text = ''
+        let totalQuantity = 0
+        let totalPrice = 0
+        hoadonList.map(hd => {
+            text += 
+            `
+                <tr>
+                    <td rowspan="${hd.cthd.length}">${hd.id}</td>
+                    <td rowspan="${hd.cthd.length}">${hd.hoten}</td>
+                    <td rowspan="${hd.cthd.length}">${hd.cmnd}</td>
+                    <td rowspan="${hd.cthd.length}">${hd.diachi}</td>
+                    <td>${hd.cthd[0].tenhang}</td>
+                    <td>${hd.cthd[0].soluong}</td>
+                    <td>${hd.cthd[0].dongia}</td>
+                    <td>${hd.cthd[0].soluong * hd.cthd[0].dongia}</td>
+                    <td rowspan="${hd.cthd.length}">${tongTien(hd.cthd)}</td>
+                    <td>
+                        <button class="btn btn_delete_row"><i class="fas fa-trash" aria-hidden="true"></i></button>
+                    </td>
+                </tr>
+            `
+            totalQuantity += +hd.cthd[0].soluong
+            totalPrice += tongTien(hd.cthd)
+            for(let i = 1; i < hd.cthd.length; i++){
+                totalQuantity += +hd.cthd[i].soluong
+                text += 
+                `
+                    <tr>
+                        <td>${hd.cthd[i].tenhang}</td>
+                        <td>${hd.cthd[i].soluong}</td>
+                        <td>${hd.cthd[i].dongia}</td>
+                        <td>${hd.cthd[i].soluong * hd.cthd[i].dongia}</td>
+                    </tr>
+                `
+            }
+        })
+        text += `
+            <tr>
+                <td colspan="4"></td>
+                <td >Tong so luong</td>
+                <td >${totalQuantity}</td>
+                <td colspan="2">Tong so tien</td>
+                <td >${totalPrice}</td>
+            </tr>
+        `
+        $('tbody').html(text)
+    }
+
+    // Handle add data into table
+    $('#export').click(function(){
+        let cthdList = []
+        let isValid = true
+        $('#form_cthd_list .row').each(function(){
+            let cthd = {}
+            
+            $(this).find('input').each(function(){
+                $(this).css('border-color', '#ced4da')
+                $(this).next().text('')
+                const valueInput = $(this).val().trim()
+                const id = $(this).prop('id')
+
+                // Validate
+                if(!valueInput){
+                    $(this).next().text('Yeu cau nhap du lieu')
+                    isValid = false
+                    $(this).css('border-color', 'red')
+                }
+                else if('tenhang' === id && !isTextAndNumber(valueInput)){
+                    $(this).next().text('Phai la ki tu chu hoac so')
+                    isValid = false
+                    $(this).css('border-color', 'red')
+                }
+                else if(['soluong', 'dongia'].includes(id) && !isPositiveNumber(valueInput)){
+                    $(this).next().text('Phai la so > 0')
+                    isValid = false
+                    $(this).css('border-color', 'red')
+                }
+                cthd[$(this).attr('id')] = valueInput
+            })
+            if(isValid) cthdList.push(cthd)
+        })
+        if(!isValid) return
+        const hoadonNew = {...hoadon}
+        hoadonNew.cthd = cthdList
+        hoadonList.push(hoadonNew)
+        renderTable()
+        loadDefault()
+    })
+
+    // Delete table row
+    $('table').on('click', '.btn_delete_row', function(){
+        const rowDelete = $(this).parent().siblings().first().text()
+        hoadonList = hoadonList.filter(hd => hd.id !== +rowDelete)
+        renderTable()
+    })
+</script>
+</html>

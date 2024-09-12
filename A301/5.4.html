@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+<style>
+    @import url("https://fonts.googleapis.com/css?family=Kaushan+Script");
+    
+    .container-fluid{
+        font-family: 'Kaushan Script', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        background-color: antiquewhite;
+        min-height: 100vh;
+    }
+
+    .list{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+
+    img{
+        width: 100%;
+        object-fit: cover;
+        aspect-ratio: 1/1;
+    }
+
+    .item{
+        background-color: rgba(63, 53, 63, 0.561);
+        color: azure;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        animation: faded .8s;
+    }
+
+    @keyframes faded {
+        0% {
+            opacity: 0;
+        }
+        100%{
+            opacity: 1;
+        }
+    }
+
+    .item_info{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 8px;
+    }
+
+    .filter{
+        display: flex;
+        justify-content: center;
+    }
+             
+    .btn_filter {
+        background-image: linear-gradient(to right, #4776E6 0%, #8E54E9  51%, #4776E6  100%);
+        margin: 10px;
+        padding: 8px 38px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;            
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+        display: block;
+        border: 0;
+        transition: all 1s ease-in-out;
+    }
+
+    .btn_filter:hover {
+        background-position: right center; /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+    }
+             
+    .btn_filter.active{
+        background-image: linear-gradient(to right, #232526 0%, #414345  51%, #232526  100%);
+    }
+
+    .btn_filter.active:hover {
+        background-position: right center; /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .item_info, h6{
+        font-size: 1.5rem;
+    }
+
+    .message{
+        display: none;
+        text-align: center;
+        margin: 0 auto;
+        width: fit-content;
+        column-gap: 24px;
+    }
+
+    .message.active{
+        display: flex;
+        margin-top: 40px;
+    }
+</style>
+<body>
+    <div class="container-fluid">
+        <div class="filter">
+            <!-- <button id="man_city" class="btn_filter">MC</button>
+            <button id="liverpool" class="btn_filter">Liverpool</button> -->
+        </div>
+        <div style="width: 50%;" class="input-group my-5 mx-auto">
+            <button class="btn btn-outline-secondary bg-danger text-white" disabled type="reset" id="btn_search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <input type="text" class="form-control" placeholder="Search..." aria-label="Example text with button addon" aria-describedby="button-addon1">
+        </div>
+        <div class="list">
+            <!-- <div class="item">
+                <img src="https://ichef.bbci.co.uk/news/1024/cpsprodpb/19ff/live/8f0c1a70-6867-11ef-8682-5b698259f79a.jpg" alt="">
+                <div class="item_info">
+                    <h6 class="my-2">Kevin</h6>
+                    <span>100m$</span>
+                </div>
+            </div>
+            <div class="item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2rdSGHXeyjnwWeQVMjpkid3NbaNaFe3-UHQ&s" alt="">
+                <div class="item_info">
+                    <h6 class="my-2">Kevin</h6>
+                    <span>100m$</span>
+                </div>
+            </div> -->
+        </div>
+        <div class="message">
+            <img style="width: 40px; height: 40px;" width="48" height="48" src="https://img.icons8.com/fluency/48/nothing-found.png" alt="nothing-found"/>
+            <h2> No matching results found</h2>
+        </div>
+    </div>
+</body>
+<script>
+    const playerList = [
+        {club: 'ManCity', name: 'Kevin', img: 'https://ichef.bbci.co.uk/news/1024/cpsprodpb/19ff/live/8f0c1a70-6867-11ef-8682-5b698259f79a.jpg', price: 100},
+        {club: 'ManCity', name: 'Rodri', img: 'https://media.video-cdn.espn.com/motion/2024/0116/dm_240116_Is_Rodri_actually_The_Best_player_in_the_world/dm_240116_Is_Rodri_actually_The_Best_player_in_the_world.jpg', price: 80},
+        {club: 'Liverpool', name: 'Luis Diaz', img: 'https://bna.1cdn.vn/2024/08/13/www.thisisanfield.com-wp-content-uploads-_2024-05-19-235-liverpool_wolves.jpg', price: 75},
+        {club: 'Liverpool', name: 'Chiesa', img: 'https://backend.liverpoolfc.com/sites/default/files/styles/lg/public/2024-08/federico-chiesa-factfile-cover-29082024.jpg?itok=FBLbTVfj', price: 12},
+        {club: 'MU', name: 'Antony Lord', img: 'https://media.bongda.com.vn/editor-upload/2024-7-24/phan_thanh_hai/maxresdefault.jpg', price: 100},
+        {club: 'MU', name: 'Macus Rashford', img: 'https://tmssl.akamaized.net//images/foto/galerie/marcus-rashford-manchester-united-2023-24-1696588205-118558.jpg?lm=1696588231', price: 50},
+        {club: 'Arsenal', name: 'Bukaiyo Saka', img: 'https://cdn-img.thethao247.vn/origin_640x0/storage/files/tranvutung/2024/05/04/getpaidstockcom-6636281b36790-1714831720-211039.jpg', price: 65},
+        {club: 'Arsenal', name: 'Delian Rice', img: 'https://media.bongda.com.vn/files/hai.phan/2023/09/04/sei170012590-0532.jpg', price: 100},
+        {club: 'Chelsea', name: 'Nicolas Jackson', img: 'https://img.chelseafc.com/image/upload/f_auto,w_1440,c_fill,g_faces,q_90/The%205th%20Stand%20app%20editorial/Players%20stock/Jackson/image00005.jpg', price: 40},
+    ]
+
+    const listEl = document.querySelector('.list')
+
+    const renderBtnClubList = () => {
+        let clubList = playerList.map(player => player.club)
+        clubList = new Set(clubList)
+
+        let html = '<button id="all" class="btn_filter">All</button>'
+        clubList.forEach(club => {
+            html += `<button id=${club} class="btn_filter">${club}</button>`
+        })
+        document.querySelector('.filter').innerHTML = html
+    }
+
+    const renderPlayerList = (listRender = playerList) => {
+        let list = ''
+        listRender.forEach(player => {
+            list += 
+            `<div class="item">
+                <img src=${player.img} alt="">
+                <div class="item_info">
+                    <h6 class="my-2">${player.name}</h6>
+                    <span>${player.price}m$</span>
+                </div>
+            </div>`
+        })
+        listEl.innerHTML = list
+        if(listRender.length === 0) showNotFound()
+        else hiddenNotFound()
+    }
+
+    function debounce(fn, ms) {
+        let timer;
+
+        return function () {
+            if (timer) clearTimeout(timer);
+
+            timer = setTimeout(() => {
+                fn.apply(this, arguments);
+            }, ms)
+        }
+    }
+
+    const showNotFound = () => {
+        const messageEl = document.querySelector('.message')
+        if(messageEl.classList.contains('active')) return
+        else messageEl.classList.add('active')
+    }
+
+    const hiddenNotFound = () => {
+        const messageEl = document.querySelector('.message')
+        messageEl.classList.remove('active')
+    }
+
+    renderPlayerList()
+    renderBtnClubList()
+
+    const buttonFilter = document.querySelectorAll('.btn_filter')
+
+    const resetSelect = () => {
+        buttonFilter.forEach(btn => btn.classList.remove('active'))
+    }
+
+    buttonFilter.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const clubId = e.target.id;
+            const playerFilterList = playerList.filter(player => player.club === clubId)
+
+            resetSelect()
+            btn.classList.add('active')
+
+            if(clubId === 'all') renderPlayerList()
+            else renderPlayerList(playerFilterList)
+        })
+    })
+
+    const btnSearch = document.querySelector('#btn_search')
+    const inputEl = document.querySelector('input')
+    
+    btnSearch.addEventListener('click', () => {
+        const keyword = inputEl.value.trim()
+        const playerFilterList = playerList.filter(player => player.name.toLowerCase().includes(keyword.toLowerCase()))
+        renderPlayerList(playerFilterList)
+    })
+
+    inputEl.addEventListener('keydown', debounce((e) => {
+        const keyword = inputEl.value.trim()
+        resetSelect()
+        const playerFilterList = playerList.filter(player => player.name.toLowerCase().includes(keyword.toLowerCase()))
+        renderPlayerList(playerFilterList)
+    }, 400))
+</script>
+</html>

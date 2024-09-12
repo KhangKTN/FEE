@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    .container{
+        background-color: rgb(223, 251, 241);
+        padding: 24px;
+    }
+
+    .calendar{
+        display: grid; 
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .event{
+        display: flex;
+        align-items: center;
+        border-radius: 2px;
+        overflow: hidden;
+        height: 80px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 4px;
+    }
+
+    .event_date{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        background-color: rgb(246, 64, 64);
+        color: white;
+        height: 100%;
+    }
+
+    .dayOfWeek{
+        font-size: 12px;
+    }
+
+    .date{
+        font-size: 20px;
+        font-weight: 600;
+        padding: 0 8px;
+    }
+
+    .event_name{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        row-gap: 4px;
+        background-color: white;
+        height: 100%;
+        width: 100%;
+        padding: 0 16px;
+    }
+
+    .event_type{
+        font-size: 12px;
+        font-weight: 600;
+        color: rgb(221, 74, 74);
+    }
+
+    button.see_full{
+        padding: 10px 12px;
+        border: 2px solid #799d90;
+        border-radius: 20px;
+        background-color: transparent;
+        margin-left: auto;
+        margin-right: 28px;
+        display: block;
+        margin-top: 24px;
+    }
+
+    a.see_full{
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 600;
+        color: #799d90;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="calendar">
+            <div class="event">
+                <div class="event_date">
+                    <span class="dayOfWeek">THU</span>
+                    <span class="date">03/20</span>
+                </div>
+                <div class="event_name">
+                    <span class="event_type">Empower Hour</span>
+                    <span class="event_detail">Social Media Office Hour</span>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event_date">
+                    <span class="dayOfWeek">MON</span>
+                    <span class="date">03/20</span>
+                </div>
+                <div class="event_name">
+                    <span class="event_type">Board Meetings</span>
+                    <span class="event_detail">Getting Started On Soial Media</span>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event_date" style="background-color: green;">
+                    <span class="dayOfWeek">TUE</span>
+                    <span class="date">03/20</span>
+                </div>
+                <div class="event_name">
+                    <span class="event_type" style="color: green;">CE Classes</span>
+                    <span class="event_detail">Conducting Open Houses and Developing Safety Plan</span>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event_date" style="background-color: cadetblue;">
+                    <span class="dayOfWeek">WED</span>
+                    <span class="date">03/20</span>
+                </div>
+                <div class="event_name">
+                    <span class="event_type" style="color: cadetblue;">Board Meetings</span>
+                    <span class="event_detail">Board of Direction April Meeting</span>
+                </div>
+            </div>
+        </div>
+        <div style="width: 100%;">
+            <button class="see_full">
+                <a class="see_full" href="">See Full Events Calander</a>
+            </button>
+        </div>
+    </div>
+</body>
+</html>

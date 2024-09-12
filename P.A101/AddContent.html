@@ -1,0 +1,55 @@
+<div>
+    <h1 class="border-bottom py-2 w-100">Add content</h1>
+    <form id="formAddContent" action="" class="col-8">
+        <div class="form-group">
+            <label for="">Title</label>
+            <input type="text" class="form-control" name="" id="title" aria-describedby="helpId" minlength="10" maxlength="200" placeholder="Enter the title" required>
+            <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+        </div>
+        <div class="form-group">
+            <label for="">Brief</label>
+            <textarea style="width: 100%;" class="form-control" id="brief" minlength="30" maxlength="150" cols="30"></textarea>
+            <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+        </div>
+        <div class="form-group">
+            <label for="">Content</label>
+            <textarea style="width: 100%;" class="form-control" id="content" minlength="50" maxlength="1000" cols="30"></textarea>
+            <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+        </div>
+        <div>
+            <button id="add_content" type="submit" class="btn mr-3">Submit</button>
+            <button name="reset" id="reset_content" type="button" class="btn btn-secondary">Reset</button>
+        </div>
+    </form>
+</div>
+<script>
+    $(document).ready(function(){
+        $('form').find('input').each(function () {
+            console.log($(this).prop('id'));
+        });
+    })
+
+    $('#formAddContent').submit(function(e){
+        e.preventDefault()
+
+        const title = $('#title')
+        const brief = $('#brief')
+        const content = $('#content')
+
+        JSON.parse(window.localStorage.getItem('contentList'))
+
+        let contentObj = {
+            title: title.val(),
+            brief: brief.val(),
+            content: content.val()
+        }
+
+        contentList.push(contentObj)
+        window.localStorage.setItem('contentList', JSON.stringify(contentList))
+        $('#formAddContent *').val('')
+    })
+
+    $('button#reset_content').click(function(){
+        $('#formAddContent *').val('')
+    })
+</script>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    @media only screen and (max-width: 450px){
+        section#content{
+            order: 1;
+            background-color: antiquewhite;
+        }
+
+        div#container{
+            order: 2;
+            grid-template-columns: repeat(1, auto) !important;
+        }
+
+        div#container>div{
+            grid-column: span 1;
+        }
+
+        div#container > div#signup{
+            order: -1;
+        }
+    }
+
+    @media only screen and (min-width: 451px) and (max-width: 1024px) {
+        section#content{
+            order: 1;
+            background-color: antiquewhite;
+        }
+
+        div#container{
+            order: 2;
+            grid-template-columns: repeat(2, auto) !important;
+        }
+
+        div#container > div#signup{
+            order: -1;
+            grid-column-end: auto !important;
+            padding: 50px 0 !important;
+        }
+    }
+</style>
+<body>
+    <div style="display: flex; flex-direction: column;">
+        <header style="background-color: antiquewhite; padding: 20px;">Header</header>
+        <div id="container" style="display: grid; grid-template-columns: repeat(3, auto);">
+            <div style="background-color: palegoldenrod; padding: 50px 0;">Feature 1</div>
+            <div style="background-color: palegreen; padding: 50px 0;">Feature 2</div>
+            <div style="background-color: peru; padding: 50px 0;">Feature 3</div>
+            <div id="signup" style="background-color: darkturquoise; padding: 16px 0; grid-column-end: span 3;">
+                Signup
+            </div>
+        </div>
+        <section id="content" style="background-color: azure; height: 500px;">Content</section>
+    </div>
+</body>
+</html>

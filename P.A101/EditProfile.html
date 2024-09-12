@@ -1,0 +1,77 @@
+<div>
+    <h1 class="border-bottom py-2 w-100">Edit profile</h1>
+    <form id="profile" action="" class="col-8">
+        <div class="form-group">
+            <label for="">First name</label>
+            <input type="text" class="form-control" name="" id="firstName" aria-describedby="helpId" maxlength="50" placeholder="Enter the first name" required>
+            <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+        </div>
+        <div class="form-group">
+            <label for="">Last name</label>
+            <input type="text" class="form-control" name="" id="lastName" aria-describedby="helpId" maxlength="50" placeholder="Enter the last name" required>
+            <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+        </div>
+        <div class="form-group">
+            <label for="">Email</label>
+            <span id="email" class="form-control"></span>
+            <!-- <input type="email" class="form-control" name="email" id="lastName" aria-describedby="helpId" placeholder="Enter the phone number"> -->
+            <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+        </div>
+        <div class="form-group">
+            <label for="">Phone</label>
+            <input type="text" class="form-control" id="phone" aria-describedby="helpId" placeholder="Enter the phone number" required>
+            <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+        </div>
+        <div class="form-group">
+            <label for="">Description</label>
+            <textarea style="width: 100%;" class="form-control" id="description" cols="30"></textarea>
+            <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+        </div>
+        <div>
+            <button id="update_profile" type="submit" class="btn mr-3">Submit</button>
+            <button name="reset" id="reset_profile" class="btn btn-secondary" type="button">Reset</button>
+        </div>
+    </form>
+</div>
+<script>
+    resetFormEdit = () => {
+        $('#firstName').val(userData?.firstName)
+        $('#lastName').val(userData?.lastName)
+        $('#email').text(userData?.email)
+        $('#phone').val(userData?.phone)
+        $('#description').val(userData?.description)
+    }
+
+    resetFormEdit()
+
+    $('form#profile').submit(function(e){
+        e.preventDefault()
+
+        let fieldList = ['firstName', 'lastName', 'email', 'phone', 'description']
+        $(this).find('input, textarea').each(function(){
+            userData[$(this).prop('id')] = $(this).val()
+        })
+
+        const newUserList = userList.filter(user => user.email !== userData.email)
+        newUserList.push(userData)
+
+        // console.log(newUserList);
+        window.localStorage.setItem('listUser', JSON.stringify(newUserList))
+
+        $.ajax({
+            type: "GET",
+            url: "./EditProfile.html",
+            data: userData,
+            success: function (response) {
+                $('.col-10').html(htmlLoading) 
+                setTimeout(() => {
+                    $('.col-10').html(response) 
+                }, 1000);
+            }
+        });
+    })
+
+    $('#reset_profile').click(function(){
+        resetFormEdit()
+    })
+</script>

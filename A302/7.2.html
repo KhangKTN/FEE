@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="../lib/"></script>
+    <title>Document</title>
+</head>
+<style>
+    .product{
+        display: flex;
+        column-gap: 48px;
+    }
+
+    .product_img{
+        min-width: 200px;
+        /* max-width: 400px; */
+        width: 40%;
+    }
+    
+    .product_img img{
+        aspect-ratio: 1/1;
+        width: 100%;
+    }
+
+    .product_infor{
+        width: 70%;
+    }
+
+    #total_price{
+        width: fit-content; 
+        margin-left: auto;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="product border shadow mt-5 p-3 rounded">
+            <div class="product_img">
+                <img src="" alt="">
+            </div>
+            <div class="product_infor">
+                <h4 id="name"></h4>
+                <h2 id="price" class="text-danger ml-4 mt-4"></h2>
+                <div class="ml-4">
+                    <form class="mt-5" action="">
+                        <div class="input-group mb-3">
+                            <button class="btn btn-outline-secondary" type="button" id="btn_minus">-</button>
+                            <input style="max-width: 100px;" type="number" class="form-control text-center" placeholder="" aria-describedby="button-addon1" value="1">
+                            <button class="btn btn-outline-secondary" type="button" id="btn_add">+</button>
+                        </div>
+                    </form>
+                    <span id="quantity"></span>
+                </div>
+                <div id="total_price" class="mt-5 fs-3 fw-bolder text-danger"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const product = {
+        img: 'https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-luh85zatgr392e',
+        name: 'Nils Race 10w40 Nhớt tổng hợp siêu cao cấp cho xe số, côn tay- Sản xuất tại Ý',
+        price: 347500,
+        quantity: 10
+    }
+
+    let qtyInput = 1
+
+    const formatVND = (price) => {
+        // return (price + '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        return new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND'
+        }).format(price)
+    }
+
+    $('img').prop('src', product.img)
+    $('#name').text(product.name)
+    $('#price').text(`${formatVND(product.price)} `)
+    $('#quantity').text(`${product.quantity} sản phẩm có sẵn`)
+    $('input').val(qtyInput)
+    $('#total_price').text(`Thành tiền: ${formatVND(product.price * qtyInput)}`)
+
+
+    $('#btn_add').click(() => {
+        qtyInput += 1
+        $('input').val(qtyInput)
+        $('#total_price').text(`Thành tiền: ${formatVND(product.price * qtyInput)}`)
+    })
+
+    $('#btn_minus').click(() => {
+        if(qtyInput === 1){
+            alert('Số lượng mua ít nhất phải là 1')
+            return
+        }
+        qtyInput -= 1
+        $('input').val(qtyInput)
+        $('#total_price').text(`Thành tiền: ${formatVND(product.price * qtyInput)}`)
+    })
+
+    $('input').keyup((e) => {
+        const valueInput = $('input').val().trim()
+        console.log(parseInt(valueInput));
+        if(valueInput <= 0){
+            $('input').val('')
+            return
+        }
+        if(valueInput > product.quantity){
+            $('input').val(product.quantity)
+            qtyInput = product.quantity
+            return
+        }
+        qtyInput = parseInt(valueInput)
+        $('#total_price').text(`Thành tiền: ${formatVND(product.price * qtyInput)}`)
+    })
+</script>
+</html>

@@ -1,0 +1,36 @@
+<div>
+    <h1 class="border-bottom py-2 w-100">View content</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Brief</th>
+                <th>Create Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    contentRow = ''
+    contentList.map((content, index) => {
+        contentRow += 
+            `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${content?.title}</td>
+                    <td>${content?.brief}</td>
+                    <td>${content?.content}</td>
+                </tr>
+            `
+    })
+
+    $('tbody').html(contentRow)
+</script>

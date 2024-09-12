@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../lib/bootstrap.min.css" >
+    <script src="../lib/jquery-3.7.1.min.js"></script>
+    <script src="../lib/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../lib/fontawesome-free-5.15.4-web/css/all.css" >
+    <title>Login</title>
+</head>
+<style>
+    .form-group{
+        position: relative;
+    }
+
+    .fas{
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+</style>
+<body>
+    <section style="height: 100vh;" class="ftco-section">
+        <div class="container h-100">
+            <div class="row h-100 d-flex justify-content-center align-items-center">
+                <div class="col-md-7 col-lg-5 px-0 border rounded shadow">
+                    <div class="wrap">
+                        <div style="background-color: #eaeaea;" class="w-100 px-3 py-2 border-bottom">
+                            <h3 class="m-0 text-capitalize">please sign in</h3>
+                        </div>
+                        <div class="login-wrap px-4 py-0">
+                            <form action="#" class="signin-form">
+                                <div class="form-group mt-3">
+                                    <input type="text" id="email" class="form-control" required maxlength="50" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <input id="password" type="password" class="form-control" required maxlength="50" placeholder="Password">
+                                    <!-- <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span> -->
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <div class="form-check">
+                                  <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked>
+                                    Remember Me
+                                  </label>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign
+                                        In</button>
+                                </div>
+                            </form>
+                            <p class=""><a href="./Register.html">Click here to register</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script>
+    let listUser = JSON.parse(window.localStorage.getItem('listUser'))
+    if(!listUser) listUser = []
+
+    const userIsExist = (email , password) => {
+        return listUser.some(user => user.email === email && user.password === password)
+    }
+
+    $('form').submit(function(e){
+        e.preventDefault()
+        
+        const email = $('#email').val()
+        const password = $('#password').val()
+
+        if(userIsExist(email, password)) {
+            window.location.href = './HomeLayout.html'
+            let userLogin = {email}
+            window.localStorage.setItem('userLogin', JSON.stringify(userLogin))
+        }
+        else alert('Email or password is not correct!')
+    })
+
+    $('.fas').click(function(){
+        const input = $(this).prev()
+        if(input.prop('type') === 'password'){
+            input.next().removeClass('fa-eye').addClass('fa-eye-slash')
+            input.prop('type', 'text')
+        }else {
+            input.next().removeClass('fa-eye-slash').addClass('fa-eye')
+            input.prop('type', 'password')
+        }
+    })
+</script>
+</html>

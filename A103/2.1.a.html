@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+    }
+
+    .footer{
+        display: grid;
+        grid-template-columns: 1fr 1fr 2fr;
+        background-color: rgb(73, 185, 233);
+        column-gap: 12px;
+        padding: 20px 24px;
+        color: white;
+    }
+
+    h4{
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+
+    #submit{
+        padding: 8px 12px;
+        background-color: rgb(59, 58, 58);
+        color: white;
+        text-transform: uppercase;
+        margin-top: 16px;
+        border: 0;
+        cursor: pointer;
+    }
+
+    input{
+        padding: 8px 12px;
+        border: 0;
+        outline: none;
+        width: 100%;
+    }
+</style>
+<body>
+    <footer class="footer">
+        <div class="infor">
+            <h4>About us</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis vel obcaecati maiores consectetur sapiente. Odio deserunt fugiat dignissimos officiis iure incidunt dolor asperiores nisi perspiciatis natus alias, ipsam sit. Velit.</p>
+        </div>
+        <div class="infor">
+            <h4>Better plans</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora consectetur architecto incidunt accusamus unde provident id cum, impedit illo temporibus quisquam sapiente mollitia ab molestiae maxime dicta iure harum a?</p>
+        </div>
+        <div action="">
+            <h4>Get in touch</h4>
+            <form action="">
+                <div style="display: flex; column-gap: 8px; margin-bottom: 24px; width: 100%;">
+                    <input type="text" placeholder="Name">
+                    <input type="text" placeholder="Email">
+                </div>
+                <div style="margin: 12px 0; width: 100%; display: flex;">
+                    <input type="text" placeholder="Subject">
+                </div>
+                <div style="width: 100%; display: flex;">
+                    <input type="text" placeholder="Your message">
+                </div>
+                <button id="submit">Submit</button>
+            </form>
+        </div>
+    </footer>
+</body>
+</html>

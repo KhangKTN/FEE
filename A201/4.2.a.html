@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+<body>
+    <div class="px-5 row">
+        <div class="col-10">
+            <div class="row">
+                <div class="col-9">
+                    <h5 style="border-width: 2px !important; border-color: red !important;" class="border-bottom py-2 fw-bold">Specific</h5>
+                    <div class="row">
+                        <div class="col-4 mt-3">
+                            <label class="form-label fw-bolder">First name contains</label>
+                            <input type="text" class="form-control" id="" placeholder="First name">
+                        </div>
+                        <div class="col-4 mt-3">
+                            <label class="form-label fw-bolder">Last name contains</label>
+                            <input type="text" class="form-control" id="" placeholder="Last name">
+                        </div>
+                        <div class="col-4 mt-3">
+                            <label class="form-label fw-bolder">Email contains</label>
+                            <input type="email" class="form-control" id="" placeholder="Email">
+                        </div>
+                        <div class="col-4 mt-3">
+                            <label class="form-label fw-bolder">Correspondense</label>
+                            <select class="form-select">
+                                <option value="">Doesn't master</option>
+                            </select>
+                        </div>
+                        <div class="col-8 mt-3">
+                            <label class="form-label fw-bolder">Date joined</label>
+                            <div class="col-12 d-flex align-items-center justify-content-between">
+                                <div class="col">
+                                    <input type="date" class="form-control" id="" placeholder="">
+                                </div>
+                                <div class="col-1 d-flex align-items-center justify-content-center">-</div>
+                                <div class="col">
+                                    <input type="date" class="form-control" id="" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <h5 style="border-width: 2px !important; border-color: red !important;" class="border-bottom py-2 fw-bold">Related</h5>
+                    <div class="mt-4">
+                        <label class="form-label fw-bolder">Team</label>
+                        <select class="form-select">
+                            <option value="">Doesn't master</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="col mt-3">
+                    <h5 style="border-width: 2px !important; border-color: red !important;" class="border-bottom py-2 fw-bold">Permission</h5>
+                    <div class="row">
+                        <div class="col-4">
+                            <label class="form-label fw-bolder">Group</label>
+                            <select class="form-select">
+                                <option value="">Doesn't master</option>
+                            </select>
+                        </div>
+                        <div class="col-8">
+                            <label class="form-label fw-bolder">Permission</label>
+                            <select class="form-select">
+                                <option value="">Doesn't master</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <h5 style="border-width: 2px !important; border-color: red !important;" class="border-bottom py-2 fw-bold">Attributes</h5>
+            <div class="mt-4">
+                <label class="form-label fw-bolder">Active</label>
+                <div class="col">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="doesnt_master">
+                    <label class="form-check-label" for="doesnt_master">
+                        Doesn't master
+                    </label>
+                </div>
+                <div>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="yes">
+                    <label class="form-check-label" for="yes">
+                        Yes
+                    </label>
+                </div>
+                <div>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="no">
+                    <label class="form-check-label" for="no">
+                        No
+                    </label>
+                </div>
+            </div>
+            <div class="mt-3">
+                <label class="form-label fw-bolder">Online status</label>
+                <div class="col">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="doesnt_master1">
+                    <label class="form-check-label" for="doesnt_master1">
+                        Doesn't master
+                    </label>
+                </div>
+                <div>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="online">
+                    <label class="form-check-label" for="online">
+                        Online
+                    </label>
+                </div>
+                <div>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="away">
+                    <label class="form-check-label" for="away">
+                        Away
+                    </label>
+                </div>
+                <div>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="offline">
+                    <label class="form-check-label" for="offline">
+                        Offline
+                    </label>
+                </div>
+            </div>
+            <div class="mt-3">
+                <label class="form-label fw-bolder">Superuser status</label>
+                <div class="col">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="doesnt_master2">
+                    <label class="form-check-label" for="doesnt_master2">
+                        Doesn't master
+                    </label>
+                </div>
+                <div>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="yes1">
+                    <label class="form-check-label" for="yes1">
+                        Yes
+                    </label>
+                </div>
+                <div>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="no1">
+                    <label class="form-check-label" for="no1">
+                        No
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-light px-5 py-3 mt-5 d-flex justify-content-between align-items-center">
+        <h6 class="d-flex align-items-center gap-2">
+            <i class="fa-solid fa-rotate"></i>
+            <span>Reset filter</span>
+        </h6>
+        <div class="d-flex gap-3">
+            <button style="background-color: white;" class="btn border">Cancel</button>
+            <button class="btn btn-danger"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+        </div>
+    </div>
+</body>
+</html>
